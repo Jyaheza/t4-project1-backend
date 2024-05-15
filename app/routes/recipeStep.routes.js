@@ -42,5 +42,5 @@ module.exports = (app) => {
   // Delete all Recipe Steps
   router.delete("/recipeSteps/", [authenticateRoute], RecipeStep.deleteAll);
 
-  app.use("/recipeapi", router);
+  app.use("/storiesapi", router);
 };
