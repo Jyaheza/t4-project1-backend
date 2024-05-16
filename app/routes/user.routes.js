@@ -1,3 +1,4 @@
+//test
 module.exports = (app) => {
   const User = require("../controllers/user.controller.js");
   const { authenticateRoute } = require("../authentication/authentication");
