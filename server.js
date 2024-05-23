@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the recipe backend." });
 });
 
+require("./app/routes/stories.routes.js")(app);
 require("./app/routes/auth.routes.js")(app);
 require("./app/routes/ingredient.routes")(app);
 require("./app/routes/recipe.routes")(app);
