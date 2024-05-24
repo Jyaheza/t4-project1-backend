@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Node.js dependencies
 /node_modules
 /npm-debug.log
@@ -77,3 +78,7 @@ temp
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+=======
+node_modules
+node_modules
+>>>>>>> origin/B-08218_CreateJSModels_MM
