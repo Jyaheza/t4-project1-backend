@@ -1,8 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const Language = sequelize.define("language", {
-      storyId: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
       },
       name: {
         type: Sequelize.STRING,

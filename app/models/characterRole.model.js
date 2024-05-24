@@ -1,8 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const characterRole = sequelize.define("characterRole", {
-      storyId: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
       },
       name: {
         type: Sequelize.STRING,
