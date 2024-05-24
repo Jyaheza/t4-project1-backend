@@ -1,5 +1,5 @@
 {
-  "name": "recipe-backend",
+  "name": "storytime-backend",
   "version": "1.0.0",
   "description": "Recipe Node.js with Rest API",
   "main": "server.js",
@@ -19,7 +19,7 @@
     "bcryptjs": "^2.4.3",
     "cohere-ai": "^7.10.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.3",
     "googleapis": "^118.0.0",
     "jest": "^29.3.1",
