@@ -5,7 +5,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
         story: {
-            type: Sequelize.STRING(5000),
+            type: Sequelize.TEXT,
             allowNull: false,
         },
 
