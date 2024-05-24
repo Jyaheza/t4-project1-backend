@@ -19,7 +19,7 @@ module.exports = (app) => {
     // Update a Recipe with id
     router.put("/userId/:storyId", [authenticateRoute], Story.update);
   
-    // Delete a Recipe with id
+    // Delete a story with id
     router.delete("/userId/:storyId", [authenticateRoute], Story.delete);
   
     app.use("/storiesapi", router);
