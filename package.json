@@ -1,12 +1,12 @@
 {
   "name": "storytime-backend",
   "version": "1.0.0",
-  "description": "Recipe Node.js with Rest API",
+  "description": "Storytime Node.js with Rest API",
   "main": "server.js",
   "scripts": {
     "test": "jest --",
     "start": "node server.js",
-    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json recipe-backend.service .env deploy"
+    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json storytime-backend.service .env deploy"
   },
   "keywords": [
     "node.js",
@@ -17,9 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "cohere-ai": "^7.10.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "googleapis": "^118.0.0",
     "jest": "^29.3.1",

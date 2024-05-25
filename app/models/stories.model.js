@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
     const Story = sequelize.define("story", {
         storyId: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
