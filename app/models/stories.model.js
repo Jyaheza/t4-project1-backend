@@ -3,9 +3,8 @@ module.exports = (sequelize, Sequelize) => {
         storyId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: false,
         },
-
         userId: {
             type: Sequelize.STRING,
             allowNull: false,

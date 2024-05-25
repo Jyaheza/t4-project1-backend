@@ -1,9 +1,3 @@
-/**
- * This is the new index.js
- * Named as a copy as i will be referencing the original index.js
- * before i remove it completely
- */
-
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -47,11 +41,11 @@ db.user.hasMany(
   { as: "story" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
-db.story.belongsTo(
-  db.user,
-  { as: "user" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
+// db.story.belongsTo(
+//   db.user,
+//   { as: "users" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
 /**
  * Below is going to be the properties of the story with the language, country, setting, and character role.
@@ -66,59 +60,58 @@ db.story.belongsTo(
 /**
  * story | language
  */
-db.story.hasMany(
-  db.language,
-  { as: "language" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
-db.language.belongsTo(
-  db.story,
-  { as: "story" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
+// db.story.hasMany(
+//   db.language,
+//   { as: "language" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.language.belongsTo(
+//   db.story,
+//   { as: "story" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
-/**
- * story | country
- */
-db.story.hasMany(
-  db.country,
-  { as: "country" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
-db.country.belongsTo(
-  db.story,
-  { as: "story" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
+// /**
+//  * story | country
+//  */
+// db.story.hasMany(
+//   db.country,
+//   { as: "country" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.country.belongsTo(
+//   db.story,
+//   { as: "story" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
-/**
- * story | setting
- */
-db.story.hasMany(
-  db.setting,
-  { as: "setting" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
-db.setting.belongsTo(
-  db.story,
-  { as: "story" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
+// /**
+//  * story | setting
+//  */
+// db.story.hasMany(
+//   db.setting,
+//   { as: "setting" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.setting.belongsTo(
+//   db.story,
+//   { as: "story" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
-/**
- * story | character role
- */
+// /**
+//  * story | character role
+//  */
 
-db.story.hasMany(
-  db.characterRole,
-  { as: "character_role" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
-db.characterRole.belongsTo(
-  db.story,
-  { as: "story" },
-  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-);
-
+// db.story.hasMany(
+//   db.characterRole,
+//   { as: "character_role" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
+// db.characterRole.belongsTo(
+//   db.story,
+//   { as: "story" },
+//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+// );
 
 module.exports = db;
