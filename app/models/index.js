@@ -24,6 +24,8 @@ db.characterRole = require("./characterRole.model.js")(sequelize, Sequelize);
 db.country = require("./country.model.js")(sequelize, Sequelize);
 db.language = require("./language.model.js")(sequelize, Sequelize);
 db.setting = require("./setting.model.js")(sequelize, Sequelize);
+db.session = require("./session.model.js")(sequelize, Sequelize);
+
 
 /**
  * foreign key relations below
@@ -36,16 +38,31 @@ db.setting = require("./setting.model.js")(sequelize, Sequelize);
  *  all rows in the child table that reference the deleted row should also be deleted.
  *  This is useful for maintaining the integrity of the database.
  */
+
+// foreign key for user and story
 db.user.hasMany(
   db.story,
   { as: "story" },
   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
 );
-// db.story.belongsTo(
-//   db.user,
-//   { as: "users" },
-//   { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
-// );
+db.story.belongsTo(
+  db.user,
+  { as: "users" },
+  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+);
+
+// foreign key for user and session
+db.user.hasMany(
+  db.session,
+  { as: "session" },
+  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+);
+db.session.belongsTo(
+  db.user,
+  { as: "user" },
+  { foreignKey: { allowNull: false }, onDelete: "CASCADE" }
+);
+
 
 /**
  * Below is going to be the properties of the story with the language, country, setting, and character role.

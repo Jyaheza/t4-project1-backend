@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: false,
         },
         userId: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: false,
         },
         story: {
