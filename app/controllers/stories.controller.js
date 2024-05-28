@@ -1,3 +1,7 @@
+const { where } = require("sequelize");
+const db = require("../models");
+const Story = db.story;
+const Op = db.Sequelize.Op;
 const { startCohereChat } = require('../services/cohere-client-service');
 
 exports.create = async (req, res) => {
@@ -24,6 +28,27 @@ exports.create = async (req, res) => {
       message: "An error occurred while creating the story.",
     });
   }
+};
 
+// Retrieve all stories from the database.
+exports.findAll = (req, res) => {
+  const storyId = req.query.storyId;
+  var condition = storyId
+  ? {
+      id: {
+          [Op.like]: `%${storyId}%`,
+      },
+  }
+  : null;
 
+  Story.findAll({where: condition, order: [["name", "ASC"]]})
+  .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories.",
+      });
+    });
 };

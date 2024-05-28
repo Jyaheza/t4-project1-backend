@@ -77,3 +77,6 @@ temp
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# MacOS created files
+*.DS_Store

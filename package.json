@@ -1,12 +1,12 @@
 {
-  "name": "recipe-backend",
+  "name": "storytime-backend",
   "version": "1.0.0",
-  "description": "Recipe Node.js with Rest API",
+  "description": "Storytime Node.js with Rest API",
   "main": "server.js",
   "scripts": {
     "test": "jest --",
     "start": "node server.js",
-    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json recipe-backend.service .env deploy"
+    "bundle": "mkdir deploy && cp -r app server.js package.json package-lock.json storytime-backend.service .env deploy"
   },
   "keywords": [
     "node.js",
