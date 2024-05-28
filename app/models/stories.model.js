@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
         },
 
         parentId: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
     });
