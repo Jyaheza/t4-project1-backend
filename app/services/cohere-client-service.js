@@ -5,28 +5,15 @@ const cohere = new CohereClient({
 });
 
 /**
+ * 
  * Invokes Cohere API to generate story text.
- * 
- * @param {*} parameters - an iterable (list) of objects with a 
- * key and value * field in the, these "parameters" are passed to the Cohere API prompt
- * 
- * @returns New story as a string .
+ * @param {*} preamble - The prepatory statement for the LLM to generate text
+ * @param {*} chatInputMessage - The generated text that is to be sent to the LLM as a request or input.
+ * @returns New story as a string
  */
-async function startCohereChat(parameters) {
-    const preamble = 'You are a writer of children\'s stories';
+async function startCohereChat(preamble, chatInputMessage) {
+
     let responseTexts = '';
-    let parametersText = '';
-    let chatInputMessage = 'Can you please write me a 5 paragraph childrens bedtime story?';
-
-    if(parameters.length !== 0){
-       parameters.forEach(parameter => {
-            parametersText += `${parameter.key}: ${parameter.value}, `;
-       }); 
-    }
-
-    if(parametersText !== ''){
-        chatInputMessage += ` Please use the following parameters to help build the content of the story. ${parametersText}`;
-    }
 
     const chatStream = await cohere.chatStream({
         preamble: preamble,
