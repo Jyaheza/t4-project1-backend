@@ -21,9 +21,9 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.story = require("./stories.model.js")(sequelize, Sequelize);
 db.characterRole = require("./characterRole.model.js")(sequelize, Sequelize);
-db.country = require("./country.model.js")(sequelize, Sequelize);
+db.countries = require("./countries.model.js")(sequelize, Sequelize);
 db.language = require("./language.model.js")(sequelize, Sequelize);
-db.setting = require("./setting.model.js")(sequelize, Sequelize);
+db.settings = require("./setting.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 
 
