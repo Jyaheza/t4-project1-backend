@@ -32,6 +32,9 @@ require("./app/routes/auth.routes.js")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/settings.routes.js")(app);
 require("./app/routes/countries.routes.js")(app);
+require("./app/routes/characters.routes.js")(app);
+require("./app/routes/languages.routes.js")(app);
+
 
 
 // set port, listen for requests

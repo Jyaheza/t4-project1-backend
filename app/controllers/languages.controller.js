@@ -1,22 +1,21 @@
 const { where } = require("sequelize");
 const db = require("../models");
 const Op = db.Sequelize.Op;
-const Country = db.countries;
+const Language = db.languages;
 
-
-// Insert a new country into the story
+// Insert a new language into the database 
 exports.create = (req, res) => {
   if (req.body.name === undefined) {
-    const error = new Error("Name for Country can't be empty!");
+    const error = new Error("Name for language can't be empty!");
     error.statusCode = 400;
     throw error;
   }
 
-  const country = {
+  const language = {
     name: req.body.name
   };
 
-  Country.create(country)
+  Language.create(language)
     .then((data) => {
       res.send(data);
     })
@@ -24,74 +23,73 @@ exports.create = (req, res) => {
       res.status(500).send({
         message:
           err.message ||
-          "Some error occurred while creating the Country.",
+          "Some error occurred while creating the Language.",
       });
     });
 }
 
-
-// See all countries in the database
+// See all languages in the database
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { [Op.like]: `%${id}%`, }, } : null;
 
-  Country.findAll({ where: condition })
+  Language.findAll({ where: condition })
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving countries.",
+        message: err.message || "Some error occurred while retrieving language.",
       });
     });
 };
 
-// Remove a country from the database
+// Remove a language from the database
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Country.destroy({
+  Language.destroy({
     where: { id: id },
   })
     .then((number) => {
       if (number == 1) {
         res.send({
-          message: "Country was deleted successfully!",
+          message: "Language was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Country with id=${id}. Maybe Country was not found!`,
+          message: `Cannot delete language with id=${id}. Maybe Setting was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Could not delete Country with id=" + id,
+        message: err.message || "Could not delete language with id=" + id,
       });
     });
 };
 
-// Update a country by the id in the request
+// Update a language by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Country.update(req.body, {
+  Language.update(req.body, {
     where: { id: id },
   })
     .then((number) => {
       if (number == 1) {
         res.send({
-          message: "Country was updated successfully.",
+          message: "Language was updated successfully.",
         });
       } else {
         res.send({
-          message: `Cannot update country with id = ${id}. Maybe country was not found or req.body is empty!`,
+          message: `Cannot update language with id = ${id}. Maybe language was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Error updating country with id =" + id,
+        message: err.message || "Error updating language with id =" + id,
       });
     });
 };

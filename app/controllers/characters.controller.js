@@ -1,22 +1,21 @@
 const { where } = require("sequelize");
 const db = require("../models");
 const Op = db.Sequelize.Op;
-const Country = db.countries;
+const Characters = db.characters;
 
-
-// Insert a new country into the story
+// Create a new character
 exports.create = (req, res) => {
   if (req.body.name === undefined) {
-    const error = new Error("Name for Country can't be empty!");
+    const error = new Error("Name for character can't be empty!");
     error.statusCode = 400;
     throw error;
   }
 
-  const country = {
+  const character = {
     name: req.body.name
   };
 
-  Country.create(country)
+  Characters.create(character)
     .then((data) => {
       res.send(data);
     })
@@ -24,74 +23,72 @@ exports.create = (req, res) => {
       res.status(500).send({
         message:
           err.message ||
-          "Some error occurred while creating the Country.",
+          "Some error occurred while creating the character.",
       });
     });
 }
 
-
-// See all countries in the database
+// Find all characters in the database
 exports.findAll = (req, res) => {
   const id = req.query.id;
   var condition = id ? { id: { [Op.like]: `%${id}%`, }, } : null;
 
-  Country.findAll({ where: condition })
+  Characters.findAll({ where: condition })
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving countries.",
+        message: err.message || "Some error occurred while retrieving character.",
       });
     });
 };
 
-// Remove a country from the database
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Country.destroy({
+  Characters.destroy({
     where: { id: id },
   })
     .then((number) => {
       if (number == 1) {
         res.send({
-          message: "Country was deleted successfully!",
+          message: "characters was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Country with id=${id}. Maybe Country was not found!`,
+          message: `Cannot delete characters with id=${id}. Maybe characters was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Could not delete Country with id=" + id,
+        message: err.message || "Could not delete characters with id=" + id,
       });
     });
 };
 
-// Update a country by the id in the request
+// Update a character by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Country.update(req.body, {
+  Characters.update(req.body, {
     where: { id: id },
   })
     .then((number) => {
       if (number == 1) {
         res.send({
-          message: "Country was updated successfully.",
+          message: "Character was updated successfully.",
         });
       } else {
         res.send({
-          message: `Cannot update country with id = ${id}. Maybe country was not found or req.body is empty!`,
+          message: `Cannot update character with id = ${id}. Maybe character was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Error updating country with id =" + id,
+        message: err.message || "Error updating character with id =" + id,
       });
     });
 };

@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const db = require("../models");
 const Story = db.story;
+const User = db.user;
 const Op = db.Sequelize.Op;
 const { startCohereChat, extendStory } = require('../services/cohere-client-service');
 
@@ -129,17 +130,111 @@ exports.extend = async (req, res) => {
 };
 
 // Retrieve all stories from the database.
-exports.findAll = (req, res) => {
-  const storyId = req.query.storyId;
+exports.findAllForUser = (req, res) => {
+  const userId = req.params.userId;
+  var condition = userId
+    ? {
+      userId: {
+        [Op.like]: `%${userId}%`,
+      },
+    }
+    : null;
+
+  Story.findAll({ where: condition })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories.",
+      });
+    });
+};
+
+exports.findAllParentStoriesForUser = (req, res) => {
+  Story.findAll({
+    where: { userId: req.params.userId, parentId: null },
+    order: [["createdAt", "ASC"]]
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "An error occurred while retrieving stories."
+      });
+    });
+};
+
+// Retrieve all stories from the database for the user
+exports.findOneForUser = (req, res) => {
+  const storyId = req.params.storyId;
+  const userId = req.params.userId;
   var condition = storyId
     ? {
-      id: {
+      storyId: {
         [Op.like]: `%${storyId}%`,
       },
     }
     : null;
 
-  Story.findAll({ where: condition, order: [["name", "ASC"]] })
+  var condition2 = userId
+    ? {
+      userId: {
+        [Op.like]: `%${userId}%`,
+      },
+    }
+    : null;
+
+  Story.findAll({ where: condition, condition2 })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving stories.",
+      });
+    });
+};
+
+exports.findAllParentStoriesForUser = (req, res) => {
+  Story.findAll({
+    where: { userId: req.params.userId, parentId: null },
+    order: [["createdAt", "ASC"]]
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "An error occurred while retrieving stories."
+      });
+    });
+};
+
+// Retrieve all stories from the database for the user
+exports.findOneForUser = (req, res) => {
+  const storyId = req.params.storyId;
+  const userId = req.params.userId;
+  var condition = storyId
+    ? {
+      storyId: {
+        [Op.like]: `%${storyId}%`,
+      },
+    }
+    : null;
+
+  var condition2 = userId
+    ? {
+      userId: {
+        [Op.like]: `%${userId}%`,
+      },
+    }
+    : null;
+
+  Story.findAll({ where: condition, condition2 })
     .then((data) => {
       res.send(data);
     })
@@ -151,17 +246,52 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findAllParentStoriesForUser = (req, res) => {
-  Story.findAll({
-    where: { userId: req.params.userId, parentId: null},
-    order: [["createdAt", "ASC"]]
+// Delete a story with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.storyId;
+
+  Story.destroy({
+    where: { storyId: id },
   })
-  .then(data => {
-    res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({
-      message: err.message || "An error occurred while retrieving stories."
+    .then((number) => {
+      if (number == 1) {
+        res.send({
+          message: "Story was deleted successfully!",
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Story with id=${id}. Maybe Story was not found!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Could not delete story with id=" + id,
+      });
     });
-  });
+};
+
+// Update a Story by the id in the request
+exports.update = (req, res) => {
+  const id = req.params.storyId;
+
+  Story.update(req.body, {
+    where: { storyId: id },
+  })
+    .then((number) => {
+      if (number == 1) {
+        res.send({
+          message: "Story was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update Story with id = ${id}. Maybe story was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error updating story with id =" + id,
+      });
+    });
 };
