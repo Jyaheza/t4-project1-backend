@@ -36,4 +36,3 @@ module.exports = (app) => {
 
   app.use("/storiesapi", router);
 };
->>>>>>> 2a8c773 (added routes and controller options for settings and stories, and countries.)
