@@ -146,7 +146,22 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving stories.",
+          err.message || "An error occurred while retrieving stories.",
       });
     });
+};
+
+exports.findAllParentStoriesForUser = (req, res) => {
+  Story.findAll({
+    where: { userId: req.params.userId, parentId: null},
+    order: [["createdAt", "ASC"]]
+  })
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: err.message || "An error occurred while retrieving stories."
+    });
+  });
 };

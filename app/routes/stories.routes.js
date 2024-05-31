@@ -7,6 +7,8 @@
     router.post("/stories/:userId", Story.create);
 
     router.post("/stories/extend/:storyId", Story.extend);
+
+    router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
   
     app.use("/storiesapi", router);
   };
