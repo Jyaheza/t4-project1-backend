@@ -23,7 +23,7 @@ db.story = require("./stories.model.js")(sequelize, Sequelize);
 db.characters = require("./characters.model.js")(sequelize, Sequelize);
 db.countries = require("./countries.model.js")(sequelize, Sequelize);
 db.languages = require("./languages.model.js")(sequelize, Sequelize);
-db.settings = require("./setting.model.js")(sequelize, Sequelize);
+db.settings = require("./settings.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 
 

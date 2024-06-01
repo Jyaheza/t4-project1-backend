@@ -167,38 +167,6 @@ exports.findAllParentStoriesForUser = (req, res) => {
     });
 };
 
-// Retrieve all stories from the database for the user
-exports.findOneForUser = (req, res) => {
-  const storyId = req.params.storyId;
-  const userId = req.params.userId;
-  var condition = storyId
-    ? {
-      storyId: {
-        [Op.like]: `%${storyId}%`,
-      },
-    }
-    : null;
-
-  var condition2 = userId
-    ? {
-      userId: {
-        [Op.like]: `%${userId}%`,
-      },
-    }
-    : null;
-
-  Story.findAll({ where: condition, condition2 })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving stories.",
-      });
-    });
-};
-
 exports.findAllParentStoriesForUser = (req, res) => {
   Story.findAll({
     where: { userId: req.params.userId, parentId: null },
@@ -218,23 +186,8 @@ exports.findAllParentStoriesForUser = (req, res) => {
 exports.findOneForUser = (req, res) => {
   const storyId = req.params.storyId;
   const userId = req.params.userId;
-  var condition = storyId
-    ? {
-      storyId: {
-        [Op.like]: `%${storyId}%`,
-      },
-    }
-    : null;
 
-  var condition2 = userId
-    ? {
-      userId: {
-        [Op.like]: `%${userId}%`,
-      },
-    }
-    : null;
-
-  Story.findAll({ where: condition, condition2 })
+  Story.findAll({ where: {userId: userId, storyId: storyId} })
     .then((data) => {
       res.send(data);
     })
