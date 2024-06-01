@@ -81,7 +81,7 @@ exports.update = (req, res) => {
           message: "Character was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update character with id = ${id}. Maybe character was not found or req.body is empty!`,
         });
       }
