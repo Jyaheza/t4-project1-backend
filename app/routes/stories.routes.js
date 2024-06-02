@@ -9,6 +9,10 @@ module.exports = (app) => {
   // // Extension of a story
   router.post("/stories/extend/:storyId", [authenticateRoute], Story.extend);
 
+  router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
+
+  router.get(`/stories/read/:storyId`, Story.findAll);
+
   // Story to find all parent stories for a user.
   router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
 
