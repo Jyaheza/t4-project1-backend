@@ -56,7 +56,7 @@ exports.delete = (req, res) => {
           message: "characters was deleted successfully!",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot delete characters with id=${id}. Maybe characters was not found!`,
         });
       }
