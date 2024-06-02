@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Setting = sequelize.define("setting", {
+    const Country = sequelize.define("countries", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,6 +10,6 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
     });
-    return Setting;
+    return Country;
   };
   

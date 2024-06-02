@@ -74,7 +74,7 @@ exports.create = async (req, res) => {
     res.send(userInfo);
   } catch (err) {
     console.log(err);
-    res.status(500).send({
+    res.status(404).send({
       message: err.message || "Some error occurred while creating the User.",
     });
   }
@@ -90,7 +90,7 @@ exports.findAll = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving users.",
       });
     });
@@ -111,7 +111,7 @@ exports.findOne = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error retrieving User with id = " + id,
       });
     });
@@ -137,7 +137,7 @@ exports.findByEmail = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error retrieving User with email=" + email,
       });
     });
@@ -156,13 +156,13 @@ exports.update = (req, res) => {
           message: "User was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update User with id = ${id}. Maybe User was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error updating User with id =" + id,
       });
     });
@@ -181,13 +181,13 @@ exports.delete = (req, res) => {
           message: "User was deleted successfully!",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot delete User with id = ${id}. Maybe User was not found!`,
         });
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Could not delete User with id = " + id,
       });
     });
@@ -203,7 +203,7 @@ exports.deleteAll = (req, res) => {
       res.send({ message: `${number} People were deleted successfully!` });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message:
           err.message || "Some error occurred while removing all people.",
       });
