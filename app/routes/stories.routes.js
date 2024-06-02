@@ -9,6 +9,8 @@
     router.post("/stories/extend/:storyId", Story.extend);
 
     router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
+
+    router.get(`/stories/read/:storyId`, Story.findAll);
   
     app.use("/storiesapi", router);
   };
