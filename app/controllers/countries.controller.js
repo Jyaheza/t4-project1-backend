@@ -21,7 +21,7 @@ exports.create = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message:
           err.message ||
           "Some error occurred while creating the Country.",
@@ -40,7 +40,7 @@ exports.findAll = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving countries.",
       });
     });
@@ -65,7 +65,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Could not delete Country with id=" + id,
       });
     });
@@ -90,7 +90,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error updating country with id =" + id,
       });
     });

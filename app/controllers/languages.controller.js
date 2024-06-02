@@ -20,7 +20,7 @@ exports.create = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message:
           err.message ||
           "Some error occurred while creating the Language.",
@@ -38,7 +38,7 @@ exports.findAll = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving language.",
       });
     });
@@ -63,7 +63,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Could not delete language with id=" + id,
       });
     });
@@ -88,7 +88,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error updating language with id =" + id,
       });
     });

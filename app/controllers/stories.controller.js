@@ -51,14 +51,14 @@ exports.create = async (req, res) => {
       res.send(storyText);
     } catch (error) {
       console.error(`Response with story for user ${userId} with params ${storyParams} encountered error ${error}`);
-      res.status(500).send({
+      res.status(404).send({
         message: "An error occurred while returning the story.",
       });
     }
 
   } catch (error) {
     console.error(`Creating story for user ${userId} with params ${storyParams} encountered error ${error}`);
-    res.status(500).send({
+    res.status(404).send({
       message: "An error occurred while creating the story.",
     });
   }
@@ -117,13 +117,13 @@ exports.extend = async (req, res) => {
       res.send(storyText);
     } catch (error) {
       console.error(`Response with story for user ${userId} with params ${storyParams} encountered error ${error}`);
-      res.status(500).send({
+      res.status(404).send({
         message: "An error occurred while returning the extended story.",
       });
     }
   } catch (error) {
     console.error(`Extending story for user ${userId} with params ${storyParams} encountered error ${error}`);
-    res.status(500).send({
+    res.status(404).send({
       message: "An error occurred while extending the story.",
     });
   }
@@ -145,7 +145,7 @@ exports.findAllForUser = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message:
           err.message || "Some error occurred while retrieving stories.",
       });
@@ -161,7 +161,7 @@ exports.findAllParentStoriesForUser = (req, res) => {
       res.send(data);
     })
     .catch(err => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "An error occurred while retrieving stories."
       });
     });
@@ -176,7 +176,7 @@ exports.findAllParentStoriesForUser = (req, res) => {
       res.send(data);
     })
     .catch(err => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "An error occurred while retrieving stories."
       });
     });
@@ -192,7 +192,7 @@ exports.findOneForUser = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message:
           err.message || "An error occurred while retrieving stories.",
       });
@@ -218,7 +218,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Could not delete story with id=" + id,
       });
     });
@@ -243,7 +243,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error updating story with id =" + id,
       });
     });

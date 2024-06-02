@@ -20,7 +20,7 @@ exports.create = (req, res) => {
             res.send(data);
         })
         .catch((err) => {
-            res.status(500).send({
+          res.status(404).send({
                 message:
                     err.message ||
                     "Some error occurred while creating the Setting.",
@@ -38,7 +38,7 @@ exports.findAll = (req, res) => {
         res.send(data);
       })
       .catch((err) => {
-        res.status(500).send({
+        res.status(404).send({
           message: err.message || "Some error occurred while retrieving settings.",
         });
       });
@@ -63,7 +63,7 @@ exports.findAll = (req, res) => {
         }
       })
       .catch((err) => {
-        res.status(500).send({
+        res.status(404).send({
           message: err.message || "Could not delete Setting with id=" + id,
         });
       });
@@ -88,7 +88,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Error updating setting with id =" + id,
       });
     });
