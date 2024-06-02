@@ -57,7 +57,7 @@ exports.delete = (req, res) => {
           message: "Language was deleted successfully!",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot delete language with id=${id}. Maybe Setting was not found!`,
         });
       }
@@ -82,7 +82,7 @@ exports.update = (req, res) => {
           message: "Language was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update language with id = ${id}. Maybe language was not found or req.body is empty!`,
         });
       }

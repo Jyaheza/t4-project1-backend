@@ -212,7 +212,7 @@ exports.delete = (req, res) => {
           message: "Story was deleted successfully!",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot delete Story with id=${id}. Maybe Story was not found!`,
         });
       }
@@ -237,7 +237,7 @@ exports.update = (req, res) => {
           message: "Story was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update Story with id = ${id}. Maybe story was not found or req.body is empty!`,
         });
       }

@@ -57,7 +57,7 @@ exports.findAll = (req, res) => {
             message: "Setting was deleted successfully!",
           });
         } else {
-          res.send({
+          res.status(404).send({
             message: `Cannot delete Setting with id=${id}. Maybe Setting was not found!`,
           });
         }
@@ -82,7 +82,7 @@ exports.update = (req, res) => {
           message: "Setting was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update setting with id = ${id}. Maybe setting was not found or req.body is empty!`,
         });
       }

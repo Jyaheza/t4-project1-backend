@@ -59,7 +59,7 @@ exports.delete = (req, res) => {
           message: "Country was deleted successfully!",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot delete Country with id=${id}. Maybe Country was not found!`,
         });
       }
@@ -84,7 +84,7 @@ exports.update = (req, res) => {
           message: "Country was updated successfully.",
         });
       } else {
-        res.send({
+        res.status(404).send({
           message: `Cannot update country with id = ${id}. Maybe country was not found or req.body is empty!`,
         });
       }
