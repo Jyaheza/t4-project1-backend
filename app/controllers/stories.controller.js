@@ -93,6 +93,33 @@ exports.findAll = (req, res) => {
     },
     order: [["storyId", "ASC"]]
   })
+};
+
+
+// Retrieve stories from the database where id or parent id is a given story id.
+exports.findAll = (req, res) => {
+  const storyId = req.params.storyId;
+
+  Story.findAll({ 
+    where: {
+      [Op.or]: [
+        { storyId: storyId },
+        { parentId: storyId }
+      ]
+    },
+    order: [["storyId", "ASC"]]
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(404).send({
+        message:
+          err.message || "Some error occurred while retrieving stories.",
+      });
+    });
+};
+
 
 
 // Retrieve all stories from the database.
@@ -134,10 +161,11 @@ exports.findAllParentStoriesForUser = (req, res) => {
     });
 };
 
+//Find all parent stories for a user id
 exports.findAllParentStoriesForUser = (req, res) => {
   Story.findAll({
-    where: { userId: req.params.userId, parentId: null },
-    order: [["createdAt", "ASC"]]
+    where: { userId: req.params.userId, parentId: null},
+    order: [["storyId", "ASC"]]
   })
     .then(data => {
       res.send(data);

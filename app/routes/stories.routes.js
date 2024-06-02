@@ -32,4 +32,10 @@ module.exports = (app) => {
   router.get("/users/:userId/stories/:storyId", Story.findOneForUser);
 
   app.use("/storiesapi", router);
+
+  router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
+
+  router.get(`/stories/read/:storyId`, Story.findAll);
+
+  app.use("/storiesapi", router);
 };
