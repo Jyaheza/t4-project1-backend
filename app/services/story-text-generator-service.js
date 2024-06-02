@@ -29,14 +29,21 @@ async function generateNewStory(userId, storyParams){
     Do not say explicitaly that there will be another chapter, but rather build the plot in a 
     way that allows space for more story to be generated. Do not use phrases like "The End...for now." OR "To be continued..."`;
 
-    chatInputMessage += ` Please format your response in a JSON string like this: {storyTitle:[place story title here], storyText:'[place story text here]'}`;
+    chatInputMessage += ` Please format your response in a parsable JSON string like this: '{"storyTitle":"[place story title here]", "storyText":"[place story text here]"}'.
+    The text needs to have particular characters escaped so that it is compatible to be parsed into a JSON data structure.`;
 
     const storyResponse = await startCohereChat(preamble, chatInputMessage);
-    const storyJson = JSON.parse(storyResponse);
+    let storyJson = "";
+
+    try{
+      storyJson = JSON.parse(storyResponse);
+    } catch (error) {
+      console.error(`There was a problem JSON parsing the story returned from the LLM service for user ${userId} with params ${storyParams} encountered error ${error}`);
+      throw new Error(`Story JSON parsing error. ${error}`);
+    }
+
     const storyText = storyJson.storyText;
     const storyTitle = storyJson.storyTitle;
-
-    console.log(storyText);
 
     const story = {
       userId: userId,
