@@ -9,6 +9,10 @@ module.exports = (app) => {
   // // Extension of a story
   router.post("/stories/extend/:storyId", [authenticateRoute], Story.extend);
 
+  router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
+
+  router.get(`/stories/read/:storyId`, Story.findAll);
+
   // Story to find all parent stories for a user.
   router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
 
@@ -26,6 +30,12 @@ module.exports = (app) => {
 
   // Search for a story for a specific user
   router.get("/users/:userId/stories/:storyId", Story.findOneForUser);
+
+  app.use("/storiesapi", router);
+
+  router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
+
+  router.get(`/stories/read/:storyId`, Story.findAll);
 
   app.use("/storiesapi", router);
 };

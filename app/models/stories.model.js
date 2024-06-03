@@ -13,7 +13,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.TEXT,
             allowNull: false,
         },
-
+        title: {
+          type: Sequelize.TEXT, 
+          allowNull: true  
+        },
         parentId: {
             type: Sequelize.INTEGER,
             allowNull: true,
