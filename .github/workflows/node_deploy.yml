@@ -53,6 +53,6 @@ jobs:
             cd nodeapps/storytime-backend || exit 1
             npm install || exit 1
             sudo systemctl stop storytime-backend || exit 1
-            sudo cp deploy/storytime-backend.service /lib/systemd/system/storytime-backend.service || exit 1
+            sudo cp storytime-backend.service /lib/systemd/system/storytime-backend.service || exit 1
             sudo systemctl daemon-reload || exit 1
             sudo systemctl start storytime-backend || exit 1
