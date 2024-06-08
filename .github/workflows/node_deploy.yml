@@ -50,10 +50,9 @@ jobs:
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: true
           command: |
-            set -x
-            cd nodeapps/storytime-backend
-            npm install
-            sudo systemctl stop storytime-backend
-            sudo cp deploy/storytime-backend.service /lib/systemd/system/storytime-backend.service
-            sudo systemctl daemon-reload
-            sudo systemctl start storytime-backend
+            cd nodeapps/storytime-backend || exit 1
+            npm install || exit 1
+            sudo systemctl stop storytime-backend || exit 1
+            sudo cp deploy/storytime-backend.service /lib/systemd/system/storytime-backend.service || exit 1
+            sudo systemctl daemon-reload || exit 1
+            sudo systemctl start storytime-backend || exit 1
