@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/nodeapps/storytime-backend/
-ExecStart=/usr/bin/npm run start
+ExecStart=/usr/local/bin/npm run start
 Restart=on-failure
  
 [Install]
