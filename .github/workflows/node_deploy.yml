@@ -48,11 +48,11 @@ jobs:
         with:
           hosts: "ubuntu@ec2-3-144-140-43.us-east-2.compute.amazonaws.com"
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
-          debug: false
+          debug: true
           command: |
             cd nodeapps/storytime-backend
             npm install
             sudo systemctl stop storytime-backend
-            sudo cp deploy/storytime-backend.service /lib/systemd/system/storytime-backend.service
+            sudo cp storytime-backend.service /lib/systemd/system/storytime-backend.service
             sudo systemctl daemon-reload
             sudo systemctl start storytime-backend
