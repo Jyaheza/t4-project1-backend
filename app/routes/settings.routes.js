@@ -17,7 +17,7 @@ module.exports = (app) => {
   router.delete("/settings/:id", [authenticateRoute], Settings.delete);
 
   // Retrieve a single settings with id
-  router.get("/settings/", Settings.findAll);
+  router.get("/settings", Settings.findAll);
 
   app.use("/storiesapi", router);
 
