@@ -4,10 +4,10 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new Story
-  router.post("/stories/:userId", [authenticateRoute], Story.create);
+  router.post("/stories/:userId", Story.create);
 
   // // Extension of a story
-  router.post("/stories/extend/:storyId", [authenticateRoute], Story.extend);
+  router.post("/stories/extend/:storyId", Story.extend);
 
   router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
 
