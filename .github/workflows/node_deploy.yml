@@ -50,6 +50,7 @@ jobs:
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: true
           command: |
+            set -x
             cd nodeapps/storytime-backend
             npm install
             sudo systemctl stop storytime-backend
