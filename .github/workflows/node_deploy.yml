@@ -54,7 +54,7 @@ jobs:
           debug: true
           command: |
             cd nodeapps/storytime-backend
-            npm install
+            npm install --verbose
             sudo systemctl stop storytime-backend
             sudo cp storytime-backend.service /lib/systemd/system/storytime-backend.service
             sudo systemctl daemon-reload
