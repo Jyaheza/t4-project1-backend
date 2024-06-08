@@ -21,6 +21,9 @@ jobs:
         with:
           ref: main
       - uses: actions/setup-node@v2
+        with:
+            node-version: '20.14.0'
+      - run: npm install -g npm@latest
       - run: npm install
 
       - run: |
@@ -38,7 +41,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "deploy/"
-          REMOTE_HOST: "ec2-3-144-81-158.us-east-2.compute.amazonaws.com"
+          REMOTE_HOST: "ec2-3-17-4-61.us-east-2.compute.amazonaws.com"
           REMOTE_USER: ubuntu
           TARGET: "nodeapps/storytime-backend"
       - name: Execute SSH commmands on remote server
@@ -46,7 +49,7 @@ jobs:
         env:
           NAME: "Root"
         with:
-          hosts: "ubuntu@ec2-3-144-81-158.us-east-2.compute.amazonaws.com"
+          hosts: "ubuntu@ec2-3-17-4-61.us-east-2.compute.amazonaws.com"
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: true
           command: |
