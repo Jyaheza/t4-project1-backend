@@ -41,7 +41,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "deploy/"
-          REMOTE_HOST: "ec2-3-144-155-203.us-east-2.compute.amazonaws.com"
+          REMOTE_HOST: "ec2-52-15-111-82.us-east-2.compute.amazonaws.com"
           REMOTE_USER: ubuntu
           TARGET: "nodeapps/storytime-backend"
       - name: Execute SSH commmands on remote server
@@ -49,12 +49,12 @@ jobs:
         env:
           NAME: "Root"
         with:
-          hosts: "ubuntu@ec2-3-144-155-203.us-east-2.compute.amazonaws.com"
+          hosts: "ubuntu@ec2-52-15-111-82.us-east-2.compute.amazonaws.com"
           privateKey: ${{ secrets.SERVER_SSH_KEY }}
           debug: true
           command: |
             cd nodeapps/storytime-backend
-            npm install --verbose
+            npm install
             sudo systemctl stop storytime-backend
             sudo cp storytime-backend.service /lib/systemd/system/storytime-backend.service
             sudo systemctl daemon-reload
