@@ -16,6 +16,9 @@ module.exports = (app) => {
   // Story to find all parent stories for a user.
   router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
 
+  //Update story
+  router.put(`/stories/:storyId`, Story.update);
+
   // Retrieve all Stories for user
   router.get(
     "/users/:userId/stories/",
@@ -30,12 +33,6 @@ module.exports = (app) => {
 
   // Search for a story for a specific user
   router.get("/users/:userId/stories/:storyId", Story.findOneForUser);
-
-  app.use("/storiesapi", router);
-
-  router.get(`/stories/:userId`, Story.findAllParentStoriesForUser);
-
-  router.get(`/stories/read/:storyId`, Story.findAll);
 
   app.use("/storiesapi", router);
 };
